@@ -1,10 +1,14 @@
 // 회원 가입 페이지
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import Router from "next/router"
+import Router from 'next/router';
+import styled from 'styled-components';
 import { SIGN_UP_REQUEST } from '../reducers/user';
 
+const SignupError = styled.div`
+	color: red;
+`;
 
 const TextInput = ({ value }) => {
 	return (
@@ -106,11 +110,11 @@ const Signup = () => {
 					required
 					onChange={onChangePasswordCheck}
 					/>
-					{passwordError && <div style={{ color: 'red' }}>비밀번호가 일치하지 않습니다.</div>}
+					{passwordError && <SignupError>비밀번호가 일치하지 않습니다.</SignupError>}
 				</div>
 					<div>
 					<Checkbox name="user-term" checked={term} onChange={onChangeTerm}>OOO 말을 잘 들을 것을 동의합니다.</Checkbox>
-					{termError && <div style={{ color: 'red' }}>약관에 동의하셔야 합니다.</div>}
+					{termError && <SignupError>약관에 동의하셔야 합니다.</SignupError>}
 				</div>
 				<div style={{ marginTop: 10 }}>
 					<Button type="primary" htmlType="submit" loading={isSigningUp}>가입하기</Button>
